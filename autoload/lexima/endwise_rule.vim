@@ -27,6 +27,9 @@ function! lexima#endwise_rule#make()
   call add(rules, s:make_rule('^\s*if\>.*\%#', 'fi', ['sh', 'zsh'], []))
   call add(rules, s:make_rule('^\s*case\>.*\%#', 'esac', ['sh', 'zsh'], []))
   call add(rules, s:make_rule('\%(^\s*#.*\)\@<!do\>.*\%#', 'done', ['sh', 'zsh'], []))
+ 
+  " lua
+  call add(rules, s:make_rule('\%(^\s*#.*\)\@<!\<\%(function\|if\|for\|while\|do\|\)\>\%(.*\<end\>\)\@!.*\%#', 'end', 'lua', []))
 
   " julia
   call add(rules, s:make_rule('\%(^\s*#.*\)\@<!\<\%(module\|struct\|function\|if\|for\|while\|do\|let\|macro\)\>\%(.*\<end\>\)\@!.*\%#', 'end', 'julia', []))
