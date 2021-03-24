@@ -27,13 +27,14 @@ function! lexima#endwise_rule#make()
   call add(rules, s:make_rule('^\s*if\>.*\%#', 'fi', ['sh', 'zsh'], []))
   call add(rules, s:make_rule('^\s*case\>.*\%#', 'esac', ['sh', 'zsh'], []))
   call add(rules, s:make_rule('\%(^\s*#.*\)\@<!do\>.*\%#', 'done', ['sh', 'zsh'], []))
- 
-  " lua
-  call add(rules, s:make_rule('^\s*\zs\%(\%(local\s\+\)\=function\)\>\%(.*\<end\>\)\@!\|\<\%(then\|do\)\ze\s*$', 'end', 'lua', []))
 
   " julia
   call add(rules, s:make_rule('\%(^\s*#.*\)\@<!\<\%(module\|struct\|function\|if\|for\|while\|do\|let\|macro\)\>\%(.*\<end\>\)\@!.*\%#', 'end', 'julia', []))
   call add(rules, s:make_rule('\%(^\s*#.*\)\@<!\s*\<\%(begin\|try\|quote\)\s*\%#', 'end', 'julia', []))
+  
+  " lua
+  " call add(rules, s:make_rule('^\s*\zs\%(\%(local\s\+\)\=function\)\>\%(.*\<end\>\)\@!\|\<\%(then\|do\)\ze\s*$', 'end', 'lua', []))
+  call add(rules, s:make_rule('\%(^\s*#.*\)\@<!\<\%(function\|then\|do\)\>\%(.*\<end\>\)\@!.*\%#', 'end', 'lua', []))
 
   return rules
 endfunction
